@@ -10,6 +10,9 @@
     <div class='col-md-8 offset-md-1'>
       <h2>Books</h2>
       <%= render 'index', books: @books%>
+      <%= search_form_for @q, url: search_books_path do |f| %>
+        <%= f.search_field :title_or_body_cont %><%= f.submit '検索' %>
+      <% end %>
     </div>
   </div>
 </div>

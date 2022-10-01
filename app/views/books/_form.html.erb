@@ -8,6 +8,18 @@
     <%= f.label :説明 %>
     <%= f.text_area :body, class: 'form-control book_body' %>
   </div>
+
+  <!--レシピ材料練習-->
+    <!-- 食材入力フィールド -->
+  <div class="form-group">
+  <%= f.fields_for :book_ingredients do |t| %>
+    <%= render "books/book_ingredient_fields", f: t %>
+  <% end %>
+
+  <!-- 食材追加ボタン -->
+  <%= link_to_add_association "追加", f, :book_ingredients %>
+  </div>
+
   <div class="form-group">
     <%= f.submit class: 'btn btn-success' %>
   </div>

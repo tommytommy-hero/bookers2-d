@@ -5,11 +5,15 @@ class BooksController < ApplicationController
   def show
     @book = Book.find(params[:id])
     @book_new = Book.new
+    @book_ingredients = @book_new.book_ingredients.build
+    @steps = @book_new.steps.build
   end
 
   def index
     @books = Book.all
     @book = Book.new
+    @book_ingredients = @book.book_ingredients.build
+    @steps = @book.steps.build
   end
 
   def create
@@ -49,7 +53,9 @@ class BooksController < ApplicationController
   private
 
   def book_params
-    params.require(:book).permit(:title, :body)
+    params.require(:book).permit(:title, :body,
+    book_ingredients_attributes:[:id, :name, :quantity, :_destroy],
+    steps_attributes:[:number, :explanation, :_destroy])
   end
 
   def ensure_current_user
